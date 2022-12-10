@@ -5,7 +5,10 @@ public class Perceptron {
     double learningRate=0.1;
     int step;
     double sum;
-  
+    public static double roundAvoid(double value, int places) {
+        double scale = Math.pow(10, places);
+        return Math.round(value * scale) / scale;
+    }
 
     Perceptron(int[] twoNodes){
         for (int i = 0; i < 2; i++) {
@@ -18,8 +21,8 @@ public class Perceptron {
         for (int i = 0; i < weight.length; i++) {
             sum+=(weight[i]*input[i]);
         }
-        this.sum=sum;
-        return sum;
+        this.sum=roundAvoid(sum,1);
+        return roundAvoid(sum,1);
     }
     public int stepFunction(double sum){
         if(sum>=0){
@@ -33,7 +36,9 @@ public class Perceptron {
     }
     public double[] deltaWeight(double[] weight,int[] input){
         for (int i = 0; i < weight.length; i++) {
-            weight[i] = weight[i]-learningRate*(answer(input)-sumInputFunction(input,weight))*input[i];
+            double delta = learningRate*(answer(input)-stepFunction(sumInputFunction(input,weight)))*input[i];
+            weight[i] = roundAvoid(weight[i]+ delta,1);
+            System.out.println("delta " +delta);
         }
         return weight;
     }

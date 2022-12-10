@@ -1,12 +1,17 @@
+import java.math.RoundingMode;
 import java.util.Random;
 
 public class Main {
+    public static double roundAvoid(double value, int places) {
+        double scale = Math.pow(10, places);
+        return Math.round(value * scale) / scale;
+    }
     public static void assignWeight(double[] weight){
         Random r = new Random();
         for (int i = 0; i < weight.length; i++) {
             double randomavlue=-1 + (2) * r.nextDouble();
-            System.out.println("weight " +randomavlue);
-            weight[i]= randomavlue;
+            System.out.println("weight " +roundAvoid(randomavlue,2));
+            weight[i]= roundAvoid(randomavlue,1);
         }
     }
     public boolean check (int answer[],int[] stepResult){
@@ -18,6 +23,7 @@ public class Main {
             System.out.println("answer : " + answer[i]);
             System.out.println("guess by algo : " + stepResult[i]);
         }
+        System.out.println(" ");
         if (count==4){ return true; } else return false;
     }
     public static void main(String[] args) {
@@ -50,7 +56,7 @@ public class Main {
         System.out.println("step " +p3.stepFunction(p3.sumInputFunction(p3.input,weight)));
         System.out.println("step " +p4.stepFunction(p4.sumInputFunction(p4.input,weight)));
 
-        for (int i = 0; i < answers[i]; i++) {
+        for (int i = 0; i < answers.length; i++) {
             if (answers[i]!=step[i]){
                 weight=list[i].deltaWeight(weight,list[i].input);
                 break;
@@ -59,25 +65,40 @@ public class Main {
         for (int i = 0; i < weight.length; i++) {
             System.out.println("weight " +weight[i]);
         }
+        int counter=0;
+        while (!main1.check(answers,step)){
+//            while (counter!=4){
+            for (int i = 0; i < answers.length; i++) {
+                if (answers[i]!=step[i]){
+                    weight=list[i].deltaWeight(weight,list[i].input);
+                    break;
+                }
+            }
+             step[0] = p1.stepFunction(p1.sumInputFunction(p1.input,weight));
+             step[1] = p2.stepFunction(p2.sumInputFunction(p2.input,weight));
+             step[2] = p3.stepFunction(p3.sumInputFunction(p3.input,weight));
+             step[3] = p4.stepFunction(p4.sumInputFunction(p4.input,weight));
+             counter++;
+                System.out.println(" ");
+                System.out.println(counter);
+                System.out.println("sum " +p1.sumInputFunction(p1.input,weight));
+                System.out.println("sum " +p2.sumInputFunction(p2.input,weight));
+                System.out.println("sum " +p3.sumInputFunction(p3.input,weight));
+                System.out.println("sum " +p4.sumInputFunction(p4.input,weight));
 
-//        while (!main1.check(answers,step)){
-//            for (int i = 0; i < answers[i]; i++) {
-//                if (answers[i]!=step[i]){
-//                    weight=list[i].deltaWeight(weight,list[i].input);
-//                }
-//            }
-//             answers[0] = p1.answer(hoe);
-//             answers[1] = p2.answer(hoe1);
-//             answers[2] = p3.answer(hoe2);
-//             answers[3] = p4.answer(hoe3);
-//             step[0] = p1.stepFunction(p1.sumInputFunction(p1.input,weight));
-//             step[1] = p2.stepFunction(p2.sumInputFunction(p2.input,weight));
-//             step[2] = p3.stepFunction(p3.sumInputFunction(p3.input,weight));
-//             step[3] = p4.stepFunction(p4.sumInputFunction(p4.input,weight));
-//        }
-        for (int i = 0; i < answers.length; i++) {
-            System.out.println("answer : " + answers[i]);
-            System.out.println("guess by algo : " + step[i]);
+                System.out.println("step " +p1.stepFunction(p1.sumInputFunction(p1.input,weight)));
+                System.out.println("step " +p2.stepFunction(p2.sumInputFunction(p2.input,weight)));
+                System.out.println("step " +p3.stepFunction(p3.sumInputFunction(p3.input,weight)));
+                System.out.println("step " +p4.stepFunction(p4.sumInputFunction(p4.input,weight)));
+
+                for (int i = 0; i < weight.length; i++) {
+                    System.out.println("weight " +weight[i]);
+                }
         }
+//        for (int i = 0; i < answers.length; i++) {
+//            System.out.println("answer : " + answers[i]);
+//            System.out.println("guess by algo : " + step[i]);
+//            System.out.println(" ");
+//        }
     }
 }
