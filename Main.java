@@ -10,7 +10,7 @@ public class Main {
         Random r = new Random();
         for (int i = 0; i < weight.length; i++) {
             double randomavlue=-1 + (2) * r.nextDouble();
-            System.out.println("weight " +roundAvoid(randomavlue,2));
+            System.out.println("weight " +roundAvoid(randomavlue,1));
             weight[i]= roundAvoid(randomavlue,1);
         }
     }
@@ -46,31 +46,35 @@ public class Main {
                       p2.stepFunction(p2.sumInputFunction(p2.input,weight)),
                       p3.stepFunction(p3.sumInputFunction(p3.input,weight)),
                       p4.stepFunction(p4.sumInputFunction(p4.input,weight))};
-        System.out.println("sum " +p1.sumInputFunction(p1.input,weight));
-        System.out.println("sum " +p2.sumInputFunction(p2.input,weight));
-        System.out.println("sum " +p3.sumInputFunction(p3.input,weight));
-        System.out.println("sum " +p4.sumInputFunction(p4.input,weight));
+//        System.out.println("sum " +p1.sumInputFunction(p1.input,weight));
+//        System.out.println("sum " +p2.sumInputFunction(p2.input,weight));
+//        System.out.println("sum " +p3.sumInputFunction(p3.input,weight));
+//        System.out.println("sum " +p4.sumInputFunction(p4.input,weight));
+//
+//        System.out.println("step " +p1.stepFunction(p1.sumInputFunction(p1.input,weight)));
+//        System.out.println("step " +p2.stepFunction(p2.sumInputFunction(p2.input,weight)));
+//        System.out.println("step " +p3.stepFunction(p3.sumInputFunction(p3.input,weight)));
+//        System.out.println("step " +p4.stepFunction(p4.sumInputFunction(p4.input,weight)));
 
-        System.out.println("step " +p1.stepFunction(p1.sumInputFunction(p1.input,weight)));
-        System.out.println("step " +p2.stepFunction(p2.sumInputFunction(p2.input,weight)));
-        System.out.println("step " +p3.stepFunction(p3.sumInputFunction(p3.input,weight)));
-        System.out.println("step " +p4.stepFunction(p4.sumInputFunction(p4.input,weight)));
-
-        for (int i = 0; i < answers.length; i++) {
-            if (answers[i]!=step[i]){
-                weight=list[i].deltaWeight(weight,list[i].input);
-                break;
-            }
-        }
-        for (int i = 0; i < weight.length; i++) {
-            System.out.println("weight " +weight[i]);
-        }
+//        for (int i = 0; i < answers.length; i++) {
+//            if (answers[i]!=step[i]){
+//                weight=list[i].deltaWeight(weight,list[i].input,answers);
+//                break;
+//            }
+//        }
+//        for (int i = 0; i < weight.length; i++) {
+//            System.out.println("weight " +weight[i]);
+//        }
         int counter=0;
+        //while (counter!=20) {
         while (!main1.check(answers,step)){
-//            while (counter!=4){
+
+//            }
             for (int i = 0; i < answers.length; i++) {
                 if (answers[i]!=step[i]){
-                    weight=list[i].deltaWeight(weight,list[i].input);
+                    int answer = answers[i];
+                    int guessed = list[i].stepFunction(list[i].sumInputFunction(list[i].input,weight));
+                    weight=list[i].deltaWeight(weight,list[i].input,answer,guessed);
                     break;
                 }
             }
@@ -81,24 +85,27 @@ public class Main {
              counter++;
                 System.out.println(" ");
                 System.out.println(counter);
-                System.out.println("sum " +p1.sumInputFunction(p1.input,weight));
-                System.out.println("sum " +p2.sumInputFunction(p2.input,weight));
-                System.out.println("sum " +p3.sumInputFunction(p3.input,weight));
-                System.out.println("sum " +p4.sumInputFunction(p4.input,weight));
+//            for (int i = 0; i < weight.length; i++) {
+//                System.out.println(weight[i]);
+//            }
+//                System.out.println("sum " +p1.sumInputFunction(p1.input,weight));
+//                System.out.println("sum " +p2.sumInputFunction(p2.input,weight));
+//                System.out.println("sum " +p3.sumInputFunction(p3.input,weight));
+//                System.out.println("sum " +p4.sumInputFunction(p4.input,weight));
+//                main1.check(answers,step);
+//                System.out.println("step " +p1.stepFunction(p1.sumInputFunction(p1.input,weight)));
+//                System.out.println("step " +p2.stepFunction(p2.sumInputFunction(p2.input,weight)));
+//                System.out.println("step " +p3.stepFunction(p3.sumInputFunction(p3.input,weight)));
+//                System.out.println("step " +p4.stepFunction(p4.sumInputFunction(p4.input,weight)));
 
-                System.out.println("step " +p1.stepFunction(p1.sumInputFunction(p1.input,weight)));
-                System.out.println("step " +p2.stepFunction(p2.sumInputFunction(p2.input,weight)));
-                System.out.println("step " +p3.stepFunction(p3.sumInputFunction(p3.input,weight)));
-                System.out.println("step " +p4.stepFunction(p4.sumInputFunction(p4.input,weight)));
-
-                for (int i = 0; i < weight.length; i++) {
-                    System.out.println("weight " +weight[i]);
-                }
+//                for (int i = 0; i < weight.length; i++) {
+//                    System.out.println("weight " +weight[i]);
+//                }
         }
-//        for (int i = 0; i < answers.length; i++) {
-//            System.out.println("answer : " + answers[i]);
-//            System.out.println("guess by algo : " + step[i]);
-//            System.out.println(" ");
-//        }
+        for (int i = 0; i < answers.length; i++) {
+            System.out.println("answer : " + answers[i]);
+            System.out.println("guess by algo : " + step[i]);
+            System.out.println(" ");
+        }
     }
 }

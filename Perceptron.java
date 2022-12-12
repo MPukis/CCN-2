@@ -10,7 +10,7 @@ public class Perceptron {
         return Math.round(value * scale) / scale;
     }
 
-    Perceptron(int[] twoNodes){
+    public Perceptron(int[] twoNodes){
         for (int i = 0; i < 2; i++) {
             this.input[i]=twoNodes[i];
         }
@@ -34,11 +34,13 @@ public class Perceptron {
             return 0;
         }
     }
-    public double[] deltaWeight(double[] weight,int[] input){
+    public double[] deltaWeight(double[] weight,int[] input,int answer, int guessed){
         for (int i = 0; i < weight.length; i++) {
-            double delta = learningRate*(answer(input)-stepFunction(sumInputFunction(input,weight)))*input[i];
+//            System.out.println("pass in step" + stepFunction(sumInputFunction(input,weight)));
+//            System.out.println("passed answer" + answer);
+            double delta = learningRate*(answer-guessed)*input[i];
             weight[i] = roundAvoid(weight[i]+ delta,1);
-            System.out.println("delta " +delta);
+//            System.out.println("delta " +delta);
         }
         return weight;
     }
