@@ -55,5 +55,5 @@ public class Perceptron {
         return 2;
     }
 
-    
+   
 }
