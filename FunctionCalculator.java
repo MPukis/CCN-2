@@ -2,24 +2,34 @@ import java.util.Random;
 
 public class FunctionCalculator {
     public static void main(String[] args) {
+//initialzing training set
         Random ran = new Random();
-        Points[] trainingSet = new Points[100];
+        Points[] trainingSet = new Points[100000];
         for (int i = 0; i < trainingSet.length; i++) {
             trainingSet[i]= new Points();
         }
-        for (int i=0;i<100;i++) {
+        for (int i=0;i<5;i++) {
           System.out.println( trainingSet[i].x+ " "+trainingSet[i].y+ " " +trainingSet[i].answer);
 
         }
 
-
-        int tmp[]=  new int [100];
-        int inputs[]={0,0,0};
+        // TestPoints[] trainingSet= {new TestPoints(9,11),
+        //                         new TestPoints(4,11),
+        //                         new TestPoints(2,50),
+        //                         new TestPoints(4,7),
+        //                         new TestPoints(40,100)};
+//setting up the actual loop
+    //variable init
+        //perceptron and program variables
+        int tmp[]=  new int [100000];
+        int inputs[]={0,0,1};
+        //weight init
         double[] weights = new double[3];
         Main.assignWeight(weights);
+        //perceptron init
         Perceptron p = new Perceptron(inputs);
         int count=0;
-        while(count!=100){
+        while(count!=100000){
             for (int i = 0; i < trainingSet.length; i++) {
                 inputs[0]=trainingSet[i].x;
                 inputs[1] =trainingSet[i].y;
